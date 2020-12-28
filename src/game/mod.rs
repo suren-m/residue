@@ -28,9 +28,11 @@ impl Game {
             _ => {
                 let current_capacity = self.players.len();
                 let id = (current_capacity + 1) as u32;
+
                 let new_player_id = PlayerId(id);
-                self.players.insert(new_player_id, Player::new(PlayerId(id)));
-                Ok(PlayerId(id))
+                self.players.insert(new_player_id.clone(), Player::new(PlayerId(id)));
+
+                Ok(new_player_id)
             }
         }
     }

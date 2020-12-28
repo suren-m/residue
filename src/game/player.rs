@@ -7,7 +7,7 @@ pub enum Command<T> {
 }
 
 // note the pub keyword for fields of tuple struct
-#[derive(Debug, PartialEq, Hash, Eq)]
+#[derive(Debug, PartialEq, Hash, Eq, Clone)]
 pub struct PlayerId(pub u32);
 
 #[derive(Debug)]
