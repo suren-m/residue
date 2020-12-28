@@ -1,6 +1,6 @@
-use residue::game::{
+use residue::{
+    game::Game,
     player::{position::Position, PlayerId},
-    Game,
 };
 
 fn main() {

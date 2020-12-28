@@ -1,13 +1,12 @@
 // player module only available for game module.
 // making this pub will make it available to whole binary
 mod constants;
-pub mod player;
 
 use std::{collections::HashMap, error::Error};
 
-use player::PlayerId;
+use crate::player::{Player, PlayerId};
 
-use self::{constants::rules::*, player::Player};
+use self::constants::rules::*;
 
 pub struct Game {
     players: HashMap<PlayerId, Player>,
