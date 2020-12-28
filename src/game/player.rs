@@ -20,9 +20,9 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new() -> Self {
+    pub fn new(id: i32) -> Self {
         Player {
-            id: 1,
+            id: id,
             name: "demo".to_owned(),
             avatar: '🍕',
             health: MAX_HEALTH,

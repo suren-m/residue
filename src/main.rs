@@ -4,12 +4,20 @@ use game::Game;
 fn main() {
     println!("\n...starting...\n");
     let mut g = Game::new();
-    g.create_player();
 
-    let players = g.get_players();
-    for p in players {
-        dbg!(p);
+    for i in 1..6 {
+        match g.create_player() {
+            Ok(p) => println!("{}", p),
+            Err(e) => eprintln!("{}", e),
+        };
     }
+
+    // let players = g.get_players();
+    // for p in players {
+    //     dbg!(p);
+    // }
+
+    // g.render();
     // let mut g = Game::new();
     // g.create_player();
     // g.create_player();
