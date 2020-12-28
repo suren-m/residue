@@ -1,20 +1,33 @@
-use residue::{self, game::Player};
+mod game;
+use game::Game;
 
 fn main() {
     println!("\n...starting...\n");
-    let p = Player::new();
+    let mut g = Game::new();
+    g.create_player();
 
-    let mut board: [[char; 3]; 4] = [['.'; 3]; 4];
-
-    board[1][2] = p.get_avatar();
-
-    'outer: for i in board.iter() {
-        'inner: for j in i.iter() {
-            print!("{}\t", j.to_owned());
-        }
-        println!("\n");
+    let players = g.get_players();
+    for p in players {
+        dbg!(p);
     }
-    let position = p.get_position();
+    // let mut g = Game::new();
+    // g.create_player();
+    // g.create_player();
+    // g.create_player();
+    // g.create_player();
 
-    println!("{:?}", p);
+    // let players = g.get_players();
+    // let mut board: [[char; 3]; 4] = [['.'; 3]; 4];
+
+    // board[1][2] = p1.get_avatar();
+
+    // 'outer: for i in board.iter() {
+    //     'inner: for j in i.iter() {
+    //         print!("{}\t", j.to_owned());
+    //     }
+    //     println!("\n");
+    // }
+    // let position = p1.get_position();
+
+    // println!("{:?}", p1);
 }
