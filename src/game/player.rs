@@ -6,12 +6,16 @@ pub enum Command<T> {
     Down(T),
 }
 
+// note the pub keyword for fields of tuple struct
+#[derive(Debug, PartialEq, Hash, Eq)]
+pub struct PlayerId(pub u32);
+
 #[derive(Debug)]
 struct Position(u8, u8);
 
 #[derive(Debug)]
 pub struct Player {
-    id: i32,
+    id: PlayerId,
     name: String,
     avatar: char,
     health: u8,
@@ -20,7 +24,7 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(id: i32) -> Self {
+    pub fn new(id: PlayerId) -> Self {
         Player {
             id: id,
             name: "demo".to_owned(),

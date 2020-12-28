@@ -7,8 +7,8 @@ fn main() {
 
     for i in 1..6 {
         match g.create_player() {
-            Ok(p) => println!("{}", p),
-            Err(e) => eprintln!("{}", e),
+            Ok(p) => println!("{}", p.0),
+            Err(e) => println!("{}", e)
         };
     }
 

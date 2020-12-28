@@ -3,35 +3,39 @@
 mod constants;
 mod player;
 
-use std::error::Error;
+use std::{collections::HashMap, error::Error};
+
+use player::PlayerId;
 
 use self::{constants::rules::*, player::Player};
 
 pub struct Game {
-    players: Vec<Player>,
+    players: HashMap<PlayerId, Player>,
     board: [[char; BOARD_SIZE_X]; BOARD_SIZE_Y],
 }
 
 impl Game {
     pub fn new() -> Self {
         Game {
-            players: Vec::new(),
+            players: HashMap::new(),
             board: [['x'; BOARD_SIZE_X]; BOARD_SIZE_Y],
         }
     }
 
-    pub fn create_player(&mut self) -> Result<i32, Box<dyn Error>> {
-        if let MAX_PLAYERS = self.players.len() {
-            Err("Max players limit reached")?
-        } else {
-            let new_player_id: i32 = (self.players.len() + 1) as i32; 
-            let p = Player::new(new_player_id);
-            self.players.push(p);
-            Ok(new_player_id)
+    pub fn create_player(&mut self) -> Result<PlayerId, Box<dyn Error>> {
+        match self.players.len() {
+            MAX_PLAYERS => Err("Max players limit reached")?,
+            _ => {
+                let current_capacity = self.players.len();
+                let id = (current_capacity + 1) as u32;
+                let new_player_id = PlayerId(id);
+                self.players.insert(new_player_id, Player::new(PlayerId(id)));
+                Ok(PlayerId(id))
+            }
         }
     }
 
-    pub fn get_players(&self) -> &Vec<Player> {
+    pub fn get_players(&self) -> &HashMap<PlayerId, Player> {
         &self.players
     }
 
