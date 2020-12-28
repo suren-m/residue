@@ -22,9 +22,9 @@ impl Game {
         }
     }
 
-    pub fn create_player(&mut self) -> Result<PlayerId, Box<dyn Error>> {
+    pub fn create_player(&mut self) -> Result<PlayerId, String> {
         match self.players.len() {
-            MAX_PLAYERS => Err("Max players limit reached")?,
+            MAX_PLAYERS => Err("Max players limit reached".to_string()),
             _ => {
                 let current_capacity = self.players.len();
                 let id = (current_capacity + 1) as u32;
@@ -49,5 +49,23 @@ impl Game {
             }
             println!("\n");
         }
+    }
+}
+
+#[cfg(test)]
+mod game_tests {
+    use super::*;
+
+    #[test]
+    fn max_player_limit() {
+        let mut g = Game::new();
+        for _ in 1..=MAX_PLAYERS {
+            let is_successful = g.create_player().is_ok();
+            assert_eq!(is_successful, true);
+        }
+        // can't create more than MAX_PLAYERS
+        let p = g.create_player();
+        let res = p.is_err();
+        assert_eq!(res, true);
     }
 }
