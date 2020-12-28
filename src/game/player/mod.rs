@@ -1,3 +1,7 @@
+use self::position::Position;
+
+pub mod position;
+
 const MAX_HEALTH: u8 = 100;
 pub enum Command<T> {
     Left(T),
@@ -9,9 +13,6 @@ pub enum Command<T> {
 // note the pub keyword for fields of tuple struct
 #[derive(Debug, PartialEq, Hash, Eq, Clone)]
 pub struct PlayerId(pub u32);
-
-#[derive(Debug)]
-struct Position(u8, u8);
 
 #[derive(Debug)]
 pub struct Player {
@@ -31,12 +32,12 @@ impl Player {
             avatar: '🍕',
             health: MAX_HEALTH,
             active: true,
-            position: Position(0, 0),
+            position: Position { x: 0, y: 0 },
         }
     }
 
     pub fn get_position(&self) -> (u8, u8) {
-        (self.position.0, self.position.1)
+        (self.position.x, self.position.y)
     }
 
     pub fn get_avatar(&self) -> char {

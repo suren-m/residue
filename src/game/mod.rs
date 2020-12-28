@@ -1,7 +1,7 @@
 // player module only available for game module.
 // making this pub will make it available to whole binary
 mod constants;
-mod player;
+pub mod player;
 
 use std::{collections::HashMap, error::Error};
 
@@ -30,7 +30,8 @@ impl Game {
                 let id = (current_capacity + 1) as u32;
 
                 let new_player_id = PlayerId(id);
-                self.players.insert(new_player_id.clone(), Player::new(PlayerId(id)));
+                self.players
+                    .insert(new_player_id.clone(), Player::new(PlayerId(id)));
 
                 Ok(new_player_id)
             }

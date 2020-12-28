@@ -1,5 +1,8 @@
 mod game;
-use game::Game;
+use game::{
+    player::{position::Position, PlayerId},
+    Game,
+};
 
 fn main() {
     println!("\n...starting...\n");
@@ -7,10 +10,19 @@ fn main() {
 
     for i in 1..6 {
         match g.create_player() {
-            Ok(p) => println!("{}", p.0),
-            Err(e) => println!("{}", e)
+            Ok(p) => println!("{:?}", p),
+            Err(e) => println!("{}", e),
         };
     }
+
+    let x = g.get_players().get(&PlayerId(1));
+    println!("{:?}", x);
+
+    let xpos = Position { x: 2, y: 3 };
+    let ypos = Position { x: 1, y: 1 };
+
+    let res = xpos + ypos;
+    println!("{:?}", res);
 
     // let players = g.get_players();
     // for p in players {
