@@ -1,5 +1,4 @@
-mod game;
-use game::{
+use residue::game::{
     player::{position::Position, PlayerId},
     Game,
 };
