@@ -1,3 +1,5 @@
+use std::fmt;
+
 use self::position::Position;
 
 pub mod position;
@@ -14,6 +16,12 @@ pub enum Command<T> {
 #[derive(Debug, PartialEq, Hash, Eq, Clone)]
 pub struct PlayerId(pub u32);
 
+impl fmt::Display for PlayerId {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
 #[derive(Debug)]
 pub struct Player {
     id: PlayerId,
@@ -25,19 +33,28 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(id: PlayerId) -> Self {
+    pub fn new(id: PlayerId, avatar: char) -> Self {
+        let name = "Player".to_owned() + &id.to_string();
+
         Player {
             id: id,
-            name: "demo".to_owned(),
-            avatar: '🍕',
+            name: name,
+            avatar: avatar,
             health: MAX_HEALTH,
             active: true,
             position: Position { x: 0, y: 0 },
         }
     }
 
-    pub fn get_position(&self) -> (u8, u8) {
-        (self.position.x, self.position.y)
+    pub fn get_position(&self) -> Position {
+        Position {
+            x: self.position.x,
+            y: self.position.y,
+        }
+    }
+
+    pub fn set_position(&mut self, new_pos: Position) {
+        self.position = new_pos;
     }
 
     pub fn get_avatar(&self) -> char {

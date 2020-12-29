@@ -26,15 +26,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'residue'",
+            "name": "Debug executable 'main'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=residue",
+                    "--bin=main",
                     "--package=residue"
                 ],
                 "filter": {
-                    "name": "residue",
+                    "name": "main",
                     "kind": "bin"
                 }
             },
@@ -44,16 +44,53 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'residue'",
+            "name": "Debug unit tests in executable 'main'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=residue",
+                    "--bin=main",
                     "--package=residue"
                 ],
                 "filter": {
-                    "name": "residue",
+                    "name": "main",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'play'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=play",
+                    "--package=residue"
+                ],
+                "filter": {
+                    "name": "play",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'play'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=play",
+                    "--package=residue"
+                ],
+                "filter": {
+                    "name": "play",
                     "kind": "bin"
                 }
             },

@@ -1,52 +1,25 @@
 use residue::{
-    game::Game,
-    player::{position::Position, PlayerId},
+    game::constants::{avatars, rules::BOARD_SIZE_X},
+    player::position::Position,
+    setup,
 };
-
+//use rand::Rng;
 fn main() {
     println!("\n...starting...\n");
-    let mut g = Game::new();
 
-    for i in 1..6 {
-        match g.create_player() {
-            Ok(p) => println!("{:?}", p),
-            Err(e) => println!("{}", e),
-        };
+    let mut g = setup();
+
+    let p1_id = g.create_player(avatars::PUMPKIN).unwrap();
+
+    //let mut rng = rand::thread_rng();
+    {
+        // let randx = rng.gen_range(0, BOARD_SIZE_X);
+        // let randy = rng.gen_range(0, BOARD_SIZE_Y);
+
+        let new_pos = Position { x: 2, y: 4 };
+
+        let g = g.move_player(&p1_id, new_pos);
+
+        g.render();
     }
-
-    let x = g.get_players().get(&PlayerId(1));
-    println!("{:?}", x);
-
-    let xpos = Position { x: 2, y: 3 };
-    let ypos = Position { x: 1, y: 1 };
-
-    let res = xpos + ypos;
-    println!("{:?}", res);
-
-    // let players = g.get_players();
-    // for p in players {
-    //     dbg!(p);
-    // }
-
-    // g.render();
-    // let mut g = Game::new();
-    // g.create_player();
-    // g.create_player();
-    // g.create_player();
-    // g.create_player();
-
-    // let players = g.get_players();
-    // let mut board: [[char; 3]; 4] = [['.'; 3]; 4];
-
-    // board[1][2] = p1.get_avatar();
-
-    // 'outer: for i in board.iter() {
-    //     'inner: for j in i.iter() {
-    //         print!("{}\t", j.to_owned());
-    //     }
-    //     println!("\n");
-    // }
-    // let position = p1.get_position();
-
-    // println!("{:?}", p1);
 }
